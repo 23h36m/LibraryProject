@@ -21,7 +21,7 @@ public class FindReader {
         System.out.println("Введите Фамилию и Имя в формате [Фамилия Имя]");
         String value = scanner.nextLine();
         findService.setFinder(new FindReaderBy(library));
-        if (findService.generateResult(value) == null) {
+        if (findService.generateResult(value).isEmpty()) {
             System.out.println("Читатель не найден");
             return null;
         } else {
