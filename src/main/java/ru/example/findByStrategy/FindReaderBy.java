@@ -6,7 +6,7 @@ import ru.example.model.Reader;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class FindReaderBy implements Finder<Reader>{
+public class FindReaderBy implements Finder<Reader> {
     Library library;
 
     public FindReaderBy(Library library) {
@@ -14,12 +14,17 @@ public class FindReaderBy implements Finder<Reader>{
     }
 
     private ArrayList<Reader> toFind(String value) {
-        // Ввожу [Фамилия Имя]
-        String[] parts = value.split(" ");
-        return library.getReaders().stream()
-                .filter(surname -> surname.getSurname().equalsIgnoreCase(parts[0]))
-                .filter(name -> name.getName().equalsIgnoreCase(parts[1]))
-                .collect(Collectors.toCollection(ArrayList<Reader>::new));
+            // Ввожу [Фамилия Имя]
+            String[] parts = value.split(" ");
+            if (parts.length == 2){
+            return library.getReaders().stream()
+                    .filter(surname -> surname.getSurname().equalsIgnoreCase(parts[0]))
+                    .filter(name -> name.getName().equalsIgnoreCase(parts[1]))
+                    .collect(Collectors.toCollection(ArrayList<Reader>::new));}
+            else {
+                return new ArrayList<>();
+            }
+
     }
 
     @Override

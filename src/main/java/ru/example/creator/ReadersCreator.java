@@ -7,18 +7,27 @@ import java.util.Scanner;
 
 public class ReadersCreator {
     private Library library;
-    private SimpleReaderFactory simpleReaderFactory= new SimpleReaderFactory();
+    private SimpleReaderFactory simpleReaderFactory = new SimpleReaderFactory();
     private Scanner scanner = new Scanner(System.in);
-    String input;
+    private String input;
+    private Boolean isCorrect;
 
-    public ReadersCreator (Library library) {
+    public ReadersCreator(Library library) {
         this.library = library;
     }
 
-    public void toCreate () {
+    public void toCreate() {
         System.out.println(" Введите нового читателя в формате [Имя, Фамилия, email]");
-        input = scanner.nextLine();
-        String[] parts = input.split(", ");
-        library.getReaders().add(simpleReaderFactory.createReader(parts[0], parts[1], parts[2]));
+        isCorrect = false;
+        while (!isCorrect) {
+            input = scanner.nextLine();
+            String[] parts = input.split(", ");
+            if (parts.length == 3) {
+                library.getReaders().add(simpleReaderFactory.createReader(parts[0], parts[1], parts[2]));
+                isCorrect = true;
+            } else {
+                System.out.println("Попробуйте ввести данные заново");
+            }
+        }
     }
 }
