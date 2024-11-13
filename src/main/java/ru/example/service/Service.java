@@ -14,9 +14,11 @@ public class Service {
     private Scanner scanner = new Scanner(System.in);
     private Integer input;
     ReaderService readerService;
+    BookService bookService;
 
     public Service (Library library) {this.library = library;
-       this.readerService = new ReaderService(this.library);}
+       this.readerService = new ReaderService(this.library);
+    this.bookService = new BookService(library);}
 
     public void startService () {
         isExit = false;
@@ -24,7 +26,7 @@ public class Service {
             CommandList.listOfServiceCommands();
             enterCommand();
             switch (input) {
-                case 1:  break;
+                case 1:  bookService.startBookService(); break;
                 case 2:  readerService.startReaderService(); break;
                 case 3:  isExit = true; break;
                 default: System.out.println("Введите число от 1 од 3"); break;
