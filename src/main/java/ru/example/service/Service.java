@@ -15,26 +15,40 @@ public class Service {
     private Integer input;
     ReaderService readerService;
     BookService bookService;
+    private Boolean isCorrect;
 
-    public Service (Library library) {this.library = library;
-       this.readerService = new ReaderService(this.library);
-    this.bookService = new BookService(library);}
+    public Service(Library library) {
+        this.library = library;
+        this.readerService = new ReaderService(this.library);
+        this.bookService = new BookService(library);
+    }
 
-    public void startService () {
+    public void startService() {
         isExit = false;
         while (!isExit) {
             CommandList.listOfServiceCommands();
-            enterCommand();
-            switch (input) {
-                case 1:  bookService.startBookService(); break;
-                case 2:  readerService.startReaderService(); break;
-                case 3:  isExit = true; break;
-                default: System.out.println("Введите число от 1 од 3"); break;
+            isCorrect = false;
+            while (!isCorrect) {
+                enterCommand();
+                switch (input) {
+                    case 1:
+                        bookService.startBookService();
+                        break;
+                    case 2:
+                        readerService.startReaderService();
+                        break;
+                    case 3:
+                        isExit = true;
+                        break;
+                    default:
+                        System.out.println("Введите число от 1 до 3");
+                        break;
+                }
             }
         }
     }
 
-    private void enterCommand () {
+    private void enterCommand() {
         try {
             System.out.println("Введите команду");
             input = Integer.parseInt(scanner.nextLine());

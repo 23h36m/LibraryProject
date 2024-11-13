@@ -24,6 +24,7 @@ public class BookService {
     private BooksCreator bookCreator;
     private FindBook findBook;
     private PrintBook printBook;
+    private Boolean isCorrect;
 
     public BookService(Library library) {
         this.library = library;
@@ -37,25 +38,28 @@ public class BookService {
         isExit = false;
         while (!isExit) {
             CommandList.listOfBookCommands();
-            enterCommand();
-            switch (input) {
-                case 1:
-                    bookCreator.toCreate();
-                    break;
-                case 2:
-                    findBook.toFind();
-                    break;
-                case 3:
-                    printBook.print();
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    isExit = true;
-                    break;
-                default:
-                    System.out.println("Введите число от 1 од 5");
-                    break;
+            isCorrect = false;
+            while (!isCorrect) {
+                enterCommand();
+                switch (input) {
+                    case 1:
+                        bookCreator.toCreate();
+                        break;
+                    case 2:
+                        findBook.toFind();
+                        break;
+                    case 3:
+                        printBook.print();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        isExit = true;
+                        break;
+                    default:
+                        System.out.println("Введите число от 1 до 5");
+                        break;
+                }
             }
         }
     }

@@ -20,32 +20,50 @@ public class ReaderService {
     private ReadersCreator readersCreator;
     private FindReader findReader;
     private PrintReader printReader;
+    private Boolean isCorrect;
 
-    public ReaderService (Library library) {this.library =library; findService = new FindService<>();
+    public ReaderService(Library library) {
+        this.library = library;
+        findService = new FindService<>();
         this.readersCreator = new ReadersCreator(library);
         this.findReader = new FindReader(library);
-        this.printReader = new PrintReader(library);}
+        this.printReader = new PrintReader(library);
+    }
 
-    public void startReaderService () {
+    public void startReaderService() {
         isExit = false;
         while (!isExit) {
             CommandList.listOfReaderCommands();
-            enterCommand();
-            switch (input) {
-                case 1: readersCreator.toCreate(); break;
-                case 2: findReader.toFind(); break;
-                case 3: printReader.print(); break;
-                case 4: break;
-                case 5: isExit = true; break;
-                default: System.out.println("Введите число от 1 од 5"); break;
+            isCorrect = false;
+            while (!isCorrect) {
+                enterCommand();
+                switch (input) {
+                    case 1:
+                        readersCreator.toCreate();
+                        break;
+                    case 2:
+                        findReader.toFind();
+                        break;
+                    case 3:
+                        printReader.print();
+                        break;
+                    case 4:
+                        break;
+                    case 5:
+                        isExit = true;
+                        break;
+                    default:
+                        System.out.println("Введите число от 1 до 5");
+                        break;
+                }
             }
         }
     }
 
-    private void enterCommand () {
+    private void enterCommand() {
         try {
             System.out.println("Введите команду");
-        input = Integer.parseInt(scanner.nextLine());
+            input = Integer.parseInt(scanner.nextLine());
         } catch (InputMismatchException e) {
             System.out.println(("Команда может быть только в числовом виде!"));
         }
