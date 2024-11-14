@@ -10,6 +10,7 @@ import ru.example.model.Library;
 import ru.example.model.Reader;
 import ru.example.print.PrintBook;
 import ru.example.print.PrintReader;
+import ru.example.remove.BookRemove;
 import ru.example.utils.CommandList;
 
 import java.util.InputMismatchException;
@@ -24,6 +25,7 @@ public class BookService {
     private BooksCreator bookCreator;
     private FindBook findBook;
     private PrintBook printBook;
+    private BookRemove bookRemove;
 
     public BookService(Library library) {
         this.library = library;
@@ -31,6 +33,7 @@ public class BookService {
         this.bookCreator = new BooksCreator(library);
         this.findBook = new FindBook(library);
         this.printBook = new PrintBook(library);
+        this.bookRemove = new BookRemove(library);
     }
 
     public void startBookService() {
@@ -53,6 +56,7 @@ public class BookService {
                         printBook.print();
                         break;
                     case 4:
+                        bookRemove.remove();
                         break;
                     case 5:
                         isExit = true;

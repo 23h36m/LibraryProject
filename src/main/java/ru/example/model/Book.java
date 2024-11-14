@@ -1,6 +1,7 @@
 package ru.example.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Book implements Serializable {
     private String title;
@@ -26,6 +27,18 @@ public class Book implements Serializable {
 
     @Override
     public String toString () {
-        return "Книга [ " + title + " " + author + " " + year + " ]";
+        return "Книга [ " + title + " | " + author + " | " + year + " ]";
+    }
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Book book = (Book) obj;
+        return Objects.equals(title, book.title) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(year, book.year);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, author, year);
     }
 }

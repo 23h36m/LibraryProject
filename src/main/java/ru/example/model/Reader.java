@@ -1,6 +1,7 @@
 package ru.example.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Reader implements Serializable {
     private String name;
@@ -26,6 +27,19 @@ public class Reader implements Serializable {
 
     @Override
     public String toString () {
-        return "Читатель [ " + name + " " + surname + " " + email + " ]";
+        return "Читатель [ " + name + " | " + surname + " | " + email + " ]";
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Reader reader = (Reader) obj;
+        return Objects.equals(name, reader.name) &&
+                Objects.equals(surname, reader.surname) &&
+                Objects.equals(email, reader.email);
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname, email);
     }
 }

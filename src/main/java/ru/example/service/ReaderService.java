@@ -6,6 +6,7 @@ import ru.example.findByStrategy.FindService;
 import ru.example.model.Library;
 import ru.example.model.Reader;
 import ru.example.print.PrintReader;
+import ru.example.remove.ReaderRemove;
 import ru.example.utils.CommandList;
 
 import java.util.InputMismatchException;
@@ -20,6 +21,7 @@ public class ReaderService {
     private ReadersCreator readersCreator;
     private FindReader findReader;
     private PrintReader printReader;
+    private ReaderRemove readerRemove;
 
     public ReaderService(Library library) {
         this.library = library;
@@ -27,6 +29,7 @@ public class ReaderService {
         this.readersCreator = new ReadersCreator(library);
         this.findReader = new FindReader(library);
         this.printReader = new PrintReader(library);
+        this.readerRemove = new ReaderRemove(library);
     }
 
     public void startReaderService() {
@@ -49,6 +52,7 @@ public class ReaderService {
                         printReader.print();
                         break;
                     case 4:
+                        readerRemove.remove();
                         break;
                     case 5:
                         isExit = true;

@@ -4,6 +4,7 @@ import ru.example.findByStrategy.FindService;
 import ru.example.model.Library;
 import ru.example.model.Reader;
 import ru.example.utils.CommandList;
+import ru.example.utils.Constants;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -40,7 +41,7 @@ public class Service {
                         break;
                     case 3:
                         isExit = true;
-                        library.saveLibrary("src/main/resources/save.bin");
+                        library.saveLibrary(Constants.SAVE_PATH);
                         break;
                     default:
                         System.out.println("Введите число от 1 до 3");

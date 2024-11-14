@@ -37,7 +37,6 @@ public class Library implements Serializable {
         }
     }
 
-    // Метод для десериализации
     public static Library loadLibrary(String filename) {
         Library library = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filename))) {

@@ -46,16 +46,23 @@ public class FindBook {
         }
     }
 
-    public ArrayList<Book> toFind() {
+    public ArrayList<Book> toFindList () {
+        set();
+        String value = scanner.nextLine();
+        if (findService.generateResult(value).isEmpty()) {
+            return null;
+        } else {
+            return findService.generateResult(value);
+        }
+    }
+    public void toFind() {
         set();
         String value = scanner.nextLine();
         if (findService.generateResult(value).isEmpty()) {
             System.out.println("Книга не найдена");
-            return null;
         } else {
             System.out.println("Найден(ы) книга(и): ");
             findService.generateResult(value).forEach(System.out::println);
-            return findService.generateResult(value);
         }
     }
 }
