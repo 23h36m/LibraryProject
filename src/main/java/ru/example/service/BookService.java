@@ -18,13 +18,12 @@ import java.util.Scanner;
 public class BookService {
     private Library library;
     private FindService<Book> findService;
-    private Boolean isExit;
+    private Boolean isExit = false;
     private Scanner scanner = new Scanner(System.in);
     private Integer input;
     private BooksCreator bookCreator;
     private FindBook findBook;
     private PrintBook printBook;
-    private Boolean isCorrect;
 
     public BookService(Library library) {
         this.library = library;
@@ -37,10 +36,12 @@ public class BookService {
     public void startBookService() {
         isExit = false;
         while (!isExit) {
-            CommandList.listOfBookCommands();
-            isCorrect = false;
-            while (!isCorrect) {
+                CommandList.listOfBookCommands();
                 enterCommand();
+                if (input == null) {
+                    System.out.println("Некорректный ввод. Повторите попытку.");
+                    continue;
+                }
                 switch (input) {
                     case 1:
                         bookCreator.toCreate();
@@ -59,7 +60,6 @@ public class BookService {
                     default:
                         System.out.println("Введите число от 1 до 5");
                         break;
-                }
             }
         }
     }
@@ -68,10 +68,9 @@ public class BookService {
         try {
             System.out.println("Введите команду");
             input = Integer.parseInt(scanner.nextLine());
-        } catch (InputMismatchException e) {
-            System.out.println(("Команда может быть только в числовом виде!"));
+        } catch (NumberFormatException e) {
+            System.out.println("Команда может быть только в числовом виде!");
+            input = null;
         }
     }
-
-
 }

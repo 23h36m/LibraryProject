@@ -20,7 +20,6 @@ public class ReaderService {
     private ReadersCreator readersCreator;
     private FindReader findReader;
     private PrintReader printReader;
-    private Boolean isCorrect;
 
     public ReaderService(Library library) {
         this.library = library;
@@ -33,10 +32,12 @@ public class ReaderService {
     public void startReaderService() {
         isExit = false;
         while (!isExit) {
-            CommandList.listOfReaderCommands();
-            isCorrect = false;
-            while (!isCorrect) {
+                CommandList.listOfReaderCommands();
                 enterCommand();
+                if (input == null) {
+                    System.out.println("Некорректный ввод. Повторите попытку.");
+                    continue;
+                }
                 switch (input) {
                     case 1:
                         readersCreator.toCreate();
@@ -55,7 +56,6 @@ public class ReaderService {
                     default:
                         System.out.println("Введите число от 1 до 5");
                         break;
-                }
             }
         }
     }
@@ -64,8 +64,9 @@ public class ReaderService {
         try {
             System.out.println("Введите команду");
             input = Integer.parseInt(scanner.nextLine());
-        } catch (InputMismatchException e) {
-            System.out.println(("Команда может быть только в числовом виде!"));
+        } catch (NumberFormatException e) {
+            System.out.println("Команда может быть только в числовом виде!");
+            input = null;
         }
     }
 

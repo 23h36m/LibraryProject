@@ -1,6 +1,8 @@
 package ru.example.model;
 
-public class Reader {
+import java.io.Serializable;
+
+public class Reader implements Serializable {
     private String name;
     private String surname;
     private String email;

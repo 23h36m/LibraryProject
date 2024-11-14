@@ -15,7 +15,6 @@ public class Service {
     private Integer input;
     ReaderService readerService;
     BookService bookService;
-    private Boolean isCorrect;
 
     public Service(Library library) {
         this.library = library;
@@ -26,10 +25,12 @@ public class Service {
     public void startService() {
         isExit = false;
         while (!isExit) {
-            CommandList.listOfServiceCommands();
-            isCorrect = false;
-            while (!isCorrect) {
+                CommandList.listOfServiceCommands();
                 enterCommand();
+                if (input == null) {
+                    System.out.println("Некорректный ввод. Повторите попытку.");
+                    continue;
+                }
                 switch (input) {
                     case 1:
                         bookService.startBookService();
@@ -39,12 +40,12 @@ public class Service {
                         break;
                     case 3:
                         isExit = true;
+                        library.saveLibrary("src/main/resources/save.bin");
                         break;
                     default:
                         System.out.println("Введите число от 1 до 3");
                         break;
                 }
-            }
         }
     }
 
@@ -52,8 +53,9 @@ public class Service {
         try {
             System.out.println("Введите команду");
             input = Integer.parseInt(scanner.nextLine());
-        } catch (InputMismatchException e) {
-            System.out.println(("Команда может быть только в числовом виде!"));
+        } catch (NumberFormatException e) {
+            System.out.println("Команда может быть только в числовом виде!");
+            input = null;
         }
     }
 }
