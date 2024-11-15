@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Book implements Serializable {
-    private String title;
-    private String author;
-    private Integer year;
+    protected String title;
+    protected String author;
+    protected Integer year;
 
     public Book (String title, String author, Integer year) {
         this.title = title;
